@@ -77,5 +77,45 @@ describe('+ google()', function(){
     
     })
   })
+  
+  describe('when querying a math expression', function() {
+    it('should return the equation as the first element', function(done) {
+      var nextCounter = 0
+        , allLinks = []
+        , query = '2 + 2';
 
+      var finished = function(){
+        console.log(allLinks[0].title)
+        T (allLinks[0].title.indexOf('2 + 2 = 4') >= 0);
+        T (allLinks[0].link == null)
+        done()
+      }
+
+      google.resultsPerPage = 100;
+      google(query, function(err, next, links){
+        allLinks = allLinks.concat(links);
+        finished();
+      })
+    })
+  })
+
+  describe('when querying a conversion', function() {
+    it('should return the conversion as the first element', function(done) {
+      var nextCounter = 0
+        , allLinks = []
+        , query = '20 kmh in mph';
+
+      var finished = function(){
+        T (allLinks[0].title.indexOf('20 kph = 12.4274238 mph') >= 0);
+        T (allLinks[0].link == null)
+        done()
+      }
+
+      google.resultsPerPage = 100;
+      google(query, function(err, next, links){
+        allLinks = allLinks.concat(links);
+        finished();
+      })
+    })
+  })
 }) 
