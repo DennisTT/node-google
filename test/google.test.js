@@ -85,7 +85,6 @@ describe('+ google()', function(){
         , query = '2 + 2';
 
       var finished = function(){
-        console.log(allLinks[0].title)
         T (allLinks[0].title.indexOf('2 + 2 = 4') >= 0);
         T (allLinks[0].link == null)
         done()
